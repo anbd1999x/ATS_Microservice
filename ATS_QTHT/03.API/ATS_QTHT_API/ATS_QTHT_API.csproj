@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.410.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Common\NetCore.Caching\NetCore.Caching.csproj" />
+    <ProjectReference Include="..\..\01.Common\NetCore.Core\NetCore.Core.csproj" />
+    <ProjectReference Include="..\..\01.Common\NetCore.Model\NetCore.Model.csproj" />
+  </ItemGroup>
+
+</Project>

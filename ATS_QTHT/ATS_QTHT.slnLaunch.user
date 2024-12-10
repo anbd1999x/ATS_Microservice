@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "02.Service\\ATS_QTHT_Service.AwS3\\ATS_QTHT_Service.AwS3.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "03.API\\ATS_QTHT_API\\ATS_QTHT_API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

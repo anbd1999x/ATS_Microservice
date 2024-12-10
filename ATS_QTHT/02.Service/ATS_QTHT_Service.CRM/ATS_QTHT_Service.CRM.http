@@ -1,0 +1,6 @@
+@ATS_QTHT_Service.CRM_HostAddress = http://localhost:5103
+
+GET {{ATS_QTHT_Service.CRM_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
