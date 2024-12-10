@@ -9,11 +9,15 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.410.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\01.Common\NetCore.Caching\NetCore.Caching.csproj" />
     <ProjectReference Include="..\..\01.Common\NetCore.Core\NetCore.Core.csproj" />
+    <ProjectReference Include="..\..\01.Common\NetCore.DataProcess\NetCore.DataProcess.csproj" />
+    <ProjectReference Include="..\..\01.Common\NetCore.Logging\NetCore.Logging.csproj" />
     <ProjectReference Include="..\..\01.Common\NetCore.Model\NetCore.Model.csproj" />
   </ItemGroup>
 

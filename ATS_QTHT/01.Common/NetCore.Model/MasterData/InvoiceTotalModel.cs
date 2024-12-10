@@ -1,4 +1,4 @@
-﻿using NetCore.Extensions;
+﻿using NetCore.Core.Enums;
 using NetCore.Models.Business.Order;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using System;
-using NetCore.Extensions;
+using NetCore.Core.Enums;
 
-namespace LOYNetCore.ModelsALTY.DTO.AppStore
+namespace NetCore.Models.DTO.AppStore
 {
     public class AppStoreOrderItemDTO
     {

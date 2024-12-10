@@ -1,4 +1,4 @@
-﻿using NetCore.Extensions;
+﻿using NetCore.Core.Enums;
 using System;
 
 namespace NetCore.Models.PromotionModels

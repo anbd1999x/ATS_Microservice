@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
-using NetCore.Extensions;
+using NetCore.Core.Enums;
 
 namespace NetCore.Models.DTO.AppStore
 {

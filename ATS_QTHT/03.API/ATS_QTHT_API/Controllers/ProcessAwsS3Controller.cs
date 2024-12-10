@@ -7,6 +7,8 @@ using NetCore.Models;
 using ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NetCore.Core.Caching.Interface;
+using static NetCore.Core.Utils.Constant.SqlDapper.Query.System;
 
 namespace ATS_QTHT_API.Controllers
 {
@@ -21,13 +23,15 @@ namespace ATS_QTHT_API.Controllers
 
         private readonly ILogger<ProcessAwsS3Controller> _logger;
         private readonly IDbProcessAwsS3HttpService _dbProcessAwsS3Handler;
+        private readonly ICached _cached;
 
         /// <summary>
         /// </summary>
-        public ProcessAwsS3Controller(ILogger<ProcessAwsS3Controller> logger, IDbProcessAwsS3HttpService dbProcessAwsS3Handler)
+        public ProcessAwsS3Controller(ILogger<ProcessAwsS3Controller> logger, IDbProcessAwsS3HttpService dbProcessAwsS3Handler, ICached cached)
         {
             _logger = logger;
             _dbProcessAwsS3Handler = dbProcessAwsS3Handler;
+            _cached = cached;
         }
         /// <summary>
         /// kiểm tra kết nôi vơi s3
@@ -37,6 +41,9 @@ namespace ATS_QTHT_API.Controllers
         [HttpPost]
         public async Task<Response<bool>> CheckConnection(ConnectASW3 param)
         {
+             var res = await _cached.GetAsync<ConnectASW3>("ATS");
+            await _cached.AddAsync("ATS", param, 10);
+            var res2 = await _cached.GetAsync<ConnectASW3>("ATS");
             return await _dbProcessAwsS3Handler.CheckConnection(param);
 
         }

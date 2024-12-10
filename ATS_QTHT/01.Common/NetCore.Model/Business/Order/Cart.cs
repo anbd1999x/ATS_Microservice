@@ -1,5 +1,5 @@
 ﻿using System;
-using NetCore.Extensions;
+using NetCore.Core.Enums;
 
 namespace NetCore.Models.Business.Order
 {
