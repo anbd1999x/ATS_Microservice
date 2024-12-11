@@ -1,18 +1,10 @@
-﻿using Microsoft.AspNetCore.Http.Features.Authentication;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using NetCore.Core.Utils;
-using NetCore.DataProcess.EntitiFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using static NetCore.Core.Utils.Constant;
 
-
-namespace NetCore.DataProcess
+namespace NetCore.DataProcess.EntitiFramework
 {
     public static class ProjectServiceCollectionExtensions
     {
@@ -20,28 +12,24 @@ namespace NetCore.DataProcess
         {
             #region Config database
             var databaseType = AppSettings.Instance.GetEnviromentVariable("ConnectionString:DbType");
-            var connectionString = AppSettings.Instance.GetEnviromentVariable("ConnectionString:" + databaseType);
-
+            var connectionString = AppSettings.Instance.GetEnviromentVariable($"ConnectionString:{databaseType}");
             switch (databaseType)
             {
-                case "MySqlPomeloDatabase":
+                case DatabaseType.MYSQL:
                     services.AddDbContext<LOYALTYContext>(x => x.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
                     break;
-
-                case "MSSQLDatabase":
+                case DatabaseType.MSSQL:
                     services.AddDbContext<LOYALTYContext>(x => x.UseSqlServer(connectionString));
                     break;
-
-                case "Sqlite":
+                case DatabaseType.SQLITE:
                     services.AddDbContext<LOYALTYContext>(x => x.UseSqlite(connectionString));
                     break;
-                case "PostgreSQLDatabase":
+                case DatabaseType.POSTGRESQL:
                     services.AddDbContext<LOYALTYContext>(x => x.UseNpgsql(connectionString));
                     break;
-                case "OracleDatabase":
+                case DatabaseType.ORACLE:
                     services.AddDbContext<LOYALTYContext>(x => x.UseOracle(connectionString));
                     break;
-
                 default:
                     services.AddDbContext<LOYALTYContext>(x => x.UseSqlServer(connectionString));
                     break;

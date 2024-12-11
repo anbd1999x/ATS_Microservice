@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using NetCore.Models;
-using System.Data;
+﻿using NetCore.Models;
 using NetCore.Models.Business;
 using NetCore.Models.Business.Order;
 using NetCore.Models.PromotionModels;
 using NetCore.PaymentGate;
 using NetCore.Models.MasterData;
-using NetCore.Models.PromotionModels;
-using NetCore.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace NetCore.DataProcess.EntitiFramework
 {
     public class LOYALTYContext : DbContext
     {
+
+        /// <summary>
+        /// LOYALTYContext
+        /// </summary>
+        /// <param name="options"></param>
         public LOYALTYContext(DbContextOptions<LOYALTYContext> options) : base(options)
         {
         }

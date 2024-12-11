@@ -4,6 +4,12 @@ namespace NetCore.Core.Caching.Common
 {
     public class CacheHelpers
     {
+        /// <summary>
+        /// IsRequestClearCache
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="refreshKey"></param>
+        /// <returns></returns>
         public static bool IsRequestClearCache(HttpContext context = null, string refreshKey = null)
         {
             if (context == null) return false;

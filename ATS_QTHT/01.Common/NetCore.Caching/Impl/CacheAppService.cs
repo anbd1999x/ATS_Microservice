@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using NetCore.Core.Caching.Interface;
 using NetCore.Core.Utils;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCore.Core.Caching.Impl
 {
@@ -13,13 +9,24 @@ namespace NetCore.Core.Caching.Impl
     {
         private readonly ICached cachedData;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        /// <summary>
+        /// CacheAppService
+        /// </summary>
+        /// <param name="cachedData"></param>
+        /// <param name="httpContextAccessor"></param>
         public CacheAppService(ICached cachedData, IHttpContextAccessor httpContextAccessor)
         {
             this.cachedData = cachedData;
             _httpContextAccessor = httpContextAccessor;
         }
-
+        /// <summary>
+        /// Execute
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="cachedInMinutes"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public T Execute<T>(Expression<Func<T>> func, int cachedInMinutes, params object[] args)
         {
             var cacheKey = GenerateCacheKey(func, args);
@@ -35,7 +42,14 @@ namespace NetCore.Core.Caching.Impl
 
             return obj;
         }
-
+        /// <summary>
+        /// ExecuteAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="cachedInMinutes"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public async Task<T> ExecuteAsync<T>(Expression<Func<Task<T>>> func, int cachedInMinutes = -1, params object[] args)
         {
             var cacheKey = GenerateCacheKey(func, args);
@@ -48,19 +62,36 @@ namespace NetCore.Core.Caching.Impl
 
             return obj;
         }
-
+        /// <summary>
+        /// Remove
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="args"></param>
         public void Remove<T>(Expression<Func<T>> func, params object[] args)
         {
             var cacheKey = GenerateCacheKey(func, args);
             cachedData.Remove(cacheKey);
         }
-
+        /// <summary>
+        /// RemoveAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public async Task RemoveAsync<T>(Expression<Func<T>> func, params object[] args)
         {
             var cacheKey = GenerateCacheKey(func, args);
             await cachedData.RemoveAsync(cacheKey);
         }
-
+        /// <summary>
+        /// GenerateCacheKey
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private string GenerateCacheKey<T>(Expression<Func<T>> func, object args)
         {
             var declaringClassName = "ClassName";

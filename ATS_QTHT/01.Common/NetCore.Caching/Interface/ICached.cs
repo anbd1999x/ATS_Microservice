@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace NetCore.Core.Caching.Interface
 {
+    /// <summary>
+    /// ICached
+    /// </summary>
     public interface ICached
     {
         bool Add<T>(string key, T item, int expireInMinute = 0);

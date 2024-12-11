@@ -3,14 +3,16 @@ using NetCore.Core.Caching.Common;
 using NetCore.Core.Caching.Impl;
 using NetCore.Core.Caching.Interface;
 using NetCore.Core.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetCore.Core.Caching.Ioc
 {
     public static class RedisCachedServiceCollection
     {
+        /// <summary>
+        /// RegisterIoCs
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection RegisterIoCs(ref IServiceCollection services)
         {
             var cacheQueueConfig = AppSettings.Instance.Get<CachingConfigModel>("Cache:Redis:Queue");

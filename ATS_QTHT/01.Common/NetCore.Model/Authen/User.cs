@@ -1,5 +1,4 @@
-﻿using System;
-namespace NetCore.Models
+﻿namespace NetCore.Models
 {
     public class User : MasterCommonModel
     {

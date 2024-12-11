@@ -26,47 +26,5 @@ namespace NetCore.Core.Utils
         public static readonly bool Allow = StaticVariable.EsConfig["Allow"].ToBool();
         public static readonly int DateExtendToExpires = StaticVariable.EsConfig["DateExtendToExpires"].ToInt();
     }
-    public static class WFConfig
-    {
-        public static readonly string ApiUrl = StaticVariable.WFConfig["ApiUrl"];
-        public static readonly string WebUrl = StaticVariable.WFConfig["WebUrl"];
-    }
-    public static class MdmConfig
-    {
-        public static readonly string ApiUri = StaticVariable.MdmConfig["ApiUri"];
-        public static readonly string ApplicationId = StaticVariable.MdmConfig["ApplicationId"];
-        public static readonly string MdmUserId = StaticVariable.MdmConfig["MdmUserId"];
-        public static readonly string Authorization = StaticVariable.MdmConfig["Authorization"];
-        public static readonly string FolderMdmUpload = StaticVariable.MdmConfig["FolderMdmUpload"];
-        public static readonly string UploadFileUrl = StaticVariable.MdmConfig["UploadFileUrl"];
-        public static readonly string GetFileByNodeId = StaticVariable.MdmConfig["GetFileByNodeId"];
-        public static readonly string DownloadFileByNodeId = StaticVariable.MdmConfig["DownloadFileByNodeId"];
-        public static readonly string DeleteFileByNodeId = StaticVariable.MdmConfig["DeleteFileByNodeId"];
-        public static readonly string IdentityName = StaticVariable.MdmConfig["IdentityName"];
-        public static readonly string IdentitySercet = StaticVariable.MdmConfig["IdentitySercet"];
-        public static readonly string FoldRootPath = StaticVariable.MdmConfig["FoldRootPath"];
-        public static readonly string MoveNodeApi = StaticVariable.MdmConfig["MoveNodeApi"];
-    }
-    public static class BackupDatabaseConfig
-    {
-        public static readonly string FolderPath = StaticVariable.BackupDatabaseConfig["FolderPath"];
-        public static readonly string RestoreHistory = StaticVariable.BackupDatabaseConfig["RestoreHistory"];
-        public static readonly string RootPath = StaticVariable.BackupDatabaseConfig["RootPath"];
-    }
-    public static class Wso2Config
-    {
-        public static readonly string GetInfoUser = StaticVariable.Wso2["GetInfoUser"];
-        public static readonly string CreateUser = StaticVariable.Wso2["CreateUser"];
-        public static readonly string UpdateUser = StaticVariable.Wso2["UpdateUser"];
-        public static readonly string DeleteUser = StaticVariable.Wso2["DeleteUser"];
-        public static readonly string ChangePassword = StaticVariable.Wso2["ChangePassword"];
-    }
-    public static class KeyCloakConfig
-    {
-        public static readonly string GetInfoUser = StaticVariable.KeyCloak["GetInfoUser"];
-        public static readonly string CreateUser = StaticVariable.KeyCloak["CreateUser"];
-        public static readonly string UpdateUser = StaticVariable.KeyCloak["UpdateUser"];
-        public static readonly string DeleteUser = StaticVariable.KeyCloak["DeleteUser"];
-        public static readonly string ChangePassword = StaticVariable.KeyCloak["ChangePassword"];
-    }
+
 }

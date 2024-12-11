@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCore.Core.Caching.Interface
 {
+    /// <summary>
+    /// IQueueAndListCached
+    /// </summary>
     public interface IQueueAndListCached
     {
         void EnQueue(string key, string item);

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using NetCore.Core.Caching.Interface;
 using static NetCore.Core.Utils.Constant.SqlDapper.Query.System;
+using System.ComponentModel;
 
 namespace ATS_QTHT_API.Controllers
 {
@@ -18,6 +19,8 @@ namespace ATS_QTHT_API.Controllers
     /// </summary>
     [Route("[controller]/[action]")]
     [ApiController]
+    [Description("Nhóm chức năng xử lý tài liệu trên AWS3")]
+
     public class ProcessAwsS3Controller : ControllerBase
     {
 

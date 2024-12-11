@@ -1,12 +1,7 @@
 ﻿using NetCore.Core.Utils;
 using Polly;
 using Polly.Retry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCore.Core.Base
 {
@@ -15,6 +10,12 @@ namespace NetCore.Core.Base
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string serviceName;
         private readonly AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
+        /// <summary>
+        /// BaseHttpClientFactory
+        /// </summary>
+        /// <param name="httpClientFactory"></param>
+        /// <param name="serviceName"></param>
+        /// <param name="retry"></param>
         public BaseHttpClientFactory(IHttpClientFactory httpClientFactory, string serviceName, int retry = 3)
         {
             _httpClientFactory = httpClientFactory;
@@ -22,19 +23,39 @@ namespace NetCore.Core.Base
             _retryPolicy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
                                  .RetryAsync(retry);
         }
+        /// <summary>
+        /// CreateHttpClient
+        /// </summary>
+        /// <returns></returns>
         public virtual HttpClient CreateHttpClient()
         {
             var httpClient = _httpClientFactory.CreateClient(serviceName);
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             return httpClient;
         }
+        /// <summary>
+        /// CreateHttpClient
+        /// </summary>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public HttpClient CreateHttpClient(bool withAuthen)
         {
             if (withAuthen)
                 return CreateHttpClientWithAuthen();
             return CreateHttpClient();
         }
+        /// <summary>
+        /// CreateHttpClientWithAuthen
+        /// </summary>
+        /// <returns></returns>
         public abstract HttpClient CreateHttpClientWithAuthen();
+        /// <summary>
+        /// GetAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public virtual async Task<ResultHttp<T, string>> GetAsync<T>(string endpoint, bool withAuthen = false)
         {
             ResultHttp<T, string> resultHttp = new ResultHttp<T, string>();
@@ -58,6 +79,14 @@ namespace NetCore.Core.Base
             }
 
         }
+        /// <summary>
+        /// PostAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="content"></param>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public virtual async Task<ResultHttp<T, string>> PostAsync<T>(string endpoint, HttpContent content, bool withAuthen = false)
         {
             ResultHttp<T, string> resultHttp = new ResultHttp<T, string>();
@@ -81,6 +110,14 @@ namespace NetCore.Core.Base
             }
         }
 
+        /// <summary>
+        /// PostAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="data"></param>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public async Task<ResultHttp<T, string>> PostAsync<T>(string endpoint, object data = null, bool withAuthen = false)
         {
             ResultHttp<T, string> resultHttp = new ResultHttp<T, string>();
@@ -108,6 +145,14 @@ namespace NetCore.Core.Base
                 }
             }
         }
+        /// <summary>
+        /// GetAsync
+        /// </summary>
+        /// <typeparam name="TSuccess"></typeparam>
+        /// <typeparam name="TFalse"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public virtual async Task<ResultHttp<TSuccess, TFalse>> GetAsync<TSuccess, TFalse>(string endpoint, bool withAuthen = false)
         {
             ResultHttp<TSuccess, TFalse> resultHttp = new ResultHttp<TSuccess, TFalse>();
@@ -132,7 +177,15 @@ namespace NetCore.Core.Base
 
         }
 
-
+        /// <summary>
+        /// PostAsync
+        /// </summary>
+        /// <typeparam name="TSuccess"></typeparam>
+        /// <typeparam name="TFalse"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="content"></param>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public virtual async Task<ResultHttp<TSuccess, TFalse>> PostAsync<TSuccess, TFalse>(string endpoint, HttpContent content, bool withAuthen = false)
         {
             ResultHttp<TSuccess, TFalse> resultHttp = new ResultHttp<TSuccess, TFalse>();
@@ -156,7 +209,15 @@ namespace NetCore.Core.Base
             }
         }
 
-
+        /// <summary>
+        /// PostAsync
+        /// </summary>
+        /// <typeparam name="TSuccess"></typeparam>
+        /// <typeparam name="TFalse"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="data"></param>
+        /// <param name="withAuthen"></param>
+        /// <returns></returns>
         public async Task<ResultHttp<TSuccess, TFalse>> PostAsync<TSuccess, TFalse>(string endpoint, object data = null, bool withAuthen = false)
         {
             ResultHttp<TSuccess, TFalse> resultHttp = new ResultHttp<TSuccess, TFalse>();

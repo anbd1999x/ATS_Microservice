@@ -1,12 +1,10 @@
-﻿using NetCore.Core.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace NetCore.Core.Caching.Interface
 {
+    /// <summary>
+    /// ICacheAppService
+    /// </summary>
     public interface ICacheAppService
     {
         T Execute<T>(Expression<Func<T>> func, int cachedInMinutes, params object[] args);

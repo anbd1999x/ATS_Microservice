@@ -1,5 +1,4 @@
 ﻿
-using ATS_QTHT_API.HttpServices.WeatherForecast;
 using ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3;
 using NetCore.Core.Caching.Ioc;
 using NetCore.Core.Utils;
@@ -13,13 +12,6 @@ namespace ATS_QTHT_API.Ioc
         {
             AppSettings.Instance.SetConfiguration(configuration);
             services.AddCachingProcessServices();
-
-            services.AddHttpClient<IWeatherForecastHttpService, WeatherForecastHttpService>(client =>
-            {
-                client.BaseAddress = new Uri(AppSettings.Instance.GetEnviromentVariable(Constant.HttpServiceUrl.CRM));
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            });
-
 
             services.AddHttpClient<IDbProcessAwsS3HttpService, DbProcessAwsS3HttpService>(client =>
             {

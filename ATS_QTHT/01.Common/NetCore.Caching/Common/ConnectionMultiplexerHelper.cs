@@ -1,9 +1,4 @@
 ﻿using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetCore.Core.Caching.Common
 {
@@ -11,11 +6,20 @@ namespace NetCore.Core.Caching.Common
     {
         public ConnectionMultiplexer ConnectionMultipexe;
         public Task<ConnectionMultiplexer> ConnectionMultipexeAsync;
+        /// <summary>
+        /// ConnectionMultiplexerHelper
+        /// </summary>
+        /// <param name="configuration"></param>
         public ConnectionMultiplexerHelper(CachingConfigModel configuration)
         {
             SetConnectionMutlplexer(configuration, configuration.ServerList);
         }
-
+        /// <summary>
+        /// SetConnectionMutlplexer
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="redisHosts"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         private void SetConnectionMutlplexer(CachingConfigModel configuration, List<RedisHostModel> redisHosts)
         {
             if (configuration == null || redisHosts == null)

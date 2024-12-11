@@ -24,6 +24,10 @@ namespace NetCore.Core.Caching.Impl
         private CachingConfigModel _configuration;
         private ILogger _logger = ApplicationLogManager.CreateLogger<RedisCached>();
 
+        /// <summary>
+        /// RedisCached
+        /// </summary>
+        /// <param name="configuration"></param>
         public RedisCached(CachingConfigModel configuration = null)
         {
             _configuration = configuration;
@@ -31,7 +35,10 @@ namespace NetCore.Core.Caching.Impl
             _redisConnection = connectionMutiplexer.ConnectionMultipexe;
             _redisConnectionAsync = connectionMutiplexer.ConnectionMultipexeAsync;
         }
-
+        /// <summary>
+        /// GetDatabaseInstance
+        /// </summary>
+        /// <returns></returns>
         private IDatabase GetDatabaseInstance()
         {
             IDatabase client = null;
@@ -47,7 +54,10 @@ namespace NetCore.Core.Caching.Impl
 
             return client;
         }
-
+        /// <summary>
+        /// GetDatabaseInstanceForAsync
+        /// </summary>
+        /// <returns></returns>
         private IDatabase GetDatabaseInstanceForAsync()
         {
             IDatabase client = null;
@@ -62,7 +72,14 @@ namespace NetCore.Core.Caching.Impl
 
             return client;
         }
-
+        /// <summary>
+        /// Add
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="item"></param>
+        /// <param name="expireInMinute"></param>
+        /// <returns></returns>
         public bool Add<T>(string key, T item, int expireInMinute = 0)
         {
             try
@@ -87,7 +104,13 @@ namespace NetCore.Core.Caching.Impl
                 return false;
             }
         }
-
+        /// <summary>
+        /// Add
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="item"></param>
+        /// <param name="expireInMinute"></param>
+        /// <returns></returns>
         public bool Add(string key, string item, int expireInMinute = 0)
         {
             try
@@ -112,7 +135,14 @@ namespace NetCore.Core.Caching.Impl
                 return false;
             }
         }
-
+        /// <summary>
+        /// AddAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="item"></param>
+        /// <param name="expireInMinute"></param>
+        /// <returns></returns>
         public async Task<bool> AddAsync<T>(string key, T item, int expireInMinute = 0)
         {
             try
@@ -139,7 +169,13 @@ namespace NetCore.Core.Caching.Impl
                 return false;
             }
         }
-
+        /// <summary>
+        /// AddAsync
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="item"></param>
+        /// <param name="expireInMinute"></param>
+        /// <returns></returns>
         public async Task<bool> AddAsync(string key, string item, int expireInMinute = 0)
         {
             try
@@ -166,7 +202,14 @@ namespace NetCore.Core.Caching.Impl
                 return false;
             }
         }
-
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="context"></param>
+        /// <param name="refreshKey"></param>
+        /// <returns></returns>
         public T Get<T>(string key, HttpContext context = null, string refreshKey = null)
         {
             T result = default;
@@ -189,7 +232,13 @@ namespace NetCore.Core.Caching.Impl
             }
             return result;
         }
-
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="context"></param>
+        /// <param name="refreshKey"></param>
+        /// <returns></returns>
         public string Get(string key, HttpContext context = null, string refreshKey = null)
         {
             string result = string.Empty;
@@ -213,7 +262,14 @@ namespace NetCore.Core.Caching.Impl
             }
             return result;
         }
-
+        /// <summary>
+        /// GetAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="context"></param>
+        /// <param name="refreshKey"></param>
+        /// <returns></returns>
         public async Task<T> GetAsync<T>(string key, HttpContext context = null, string refreshKey = null)
         {
             T result = default;
@@ -235,7 +291,13 @@ namespace NetCore.Core.Caching.Impl
             }
             return result;
         }
-
+        /// <summary>
+        /// Task
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="context"></param>
+        /// <param name="refreshKey"></param>
+        /// <returns></returns>
         public async Task<string> GetAsync(string key, HttpContext context = null, string refreshKey = null)
         {
             string result = string.Empty;
@@ -248,10 +310,8 @@ namespace NetCore.Core.Caching.Impl
                     client.KeyDelete(key);
                 }
 
-
                 byte[] redisValue = await client.StringGetAsync(key);
 
-                //result = redisValue == null ? null : Unzip(redisValue);
                 result = UnZipFromBytes<string>(redisValue);
             }
             catch (Exception ex)
@@ -260,7 +320,11 @@ namespace NetCore.Core.Caching.Impl
             }
             return result;
         }
-
+        /// <summary>
+        /// Remove
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public bool Remove(string key)
         {
             bool result = false;
@@ -278,7 +342,11 @@ namespace NetCore.Core.Caching.Impl
 
             return result;
         }
-
+        /// <summary>
+        /// RemoveAsync
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveAsync(string key)
         {
             bool result = false;
@@ -296,7 +364,11 @@ namespace NetCore.Core.Caching.Impl
 
             return result;
         }
-
+        /// <summary>
+        /// RemoveWithKeyStartAsync
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveWithKeyStartAsync(string key)
         {
             bool result = false;
@@ -322,7 +394,13 @@ namespace NetCore.Core.Caching.Impl
 
             return result;
         }
-
+        /// <summary>
+        /// ZipToBytes
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private byte[] ZipToBytes<T>(T item, string key)
         {
             if (item == null || item.Equals(default(T)))
@@ -333,7 +411,12 @@ namespace NetCore.Core.Caching.Impl
             // Convert JSON string to byte array (UTF-8 encoding)
             return Encoding.UTF8.GetBytes(jsonString);
         }
-
+        /// <summary>
+        /// UnZipFromBytes
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         private T UnZipFromBytes<T>(byte[] bytes)
         {
             if (bytes == null || bytes.Length <= 0)
@@ -342,7 +425,11 @@ namespace NetCore.Core.Caching.Impl
             var jsonString = Encoding.UTF8.GetString(bytes);
             return JsonSerializer.Deserialize<T>(jsonString);
         }
-
+        /// <summary>
+        /// CopyTo
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dest"></param>
         private void CopyTo(Stream src, Stream dest)
         {
             var bytes = new byte[8096];
@@ -351,7 +438,11 @@ namespace NetCore.Core.Caching.Impl
 
             while ((cnt = src.Read(bytes, 0, bytes.Length)) != 0) dest.Write(bytes, 0, cnt);
         }
-
+        /// <summary>
+        /// Unzip
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         private string Unzip(byte[] bytes)
         {
             using (var msi = new MemoryStream(bytes))
@@ -368,6 +459,11 @@ namespace NetCore.Core.Caching.Impl
         }
 
         //Queue
+        /// <summary>
+        /// DeQueue
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string DeQueue(string key)
         {
             try
@@ -385,7 +481,12 @@ namespace NetCore.Core.Caching.Impl
                 return string.Empty;
             }
         }
-
+        /// <summary>
+        /// DeQueue
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public T DeQueue<T>(string key)
         {
             try
@@ -403,7 +504,11 @@ namespace NetCore.Core.Caching.Impl
 
             return default;
         }
-
+        /// <summary>
+        /// DeQueueAsync
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public async Task<string> DeQueueAsync(string key)
         {
             try
@@ -419,7 +524,12 @@ namespace NetCore.Core.Caching.Impl
                 return string.Empty;
             }
         }
-
+        /// <summary>
+        /// DeQueueAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public async Task<T> DeQueueAsync<T>(string key)
         {
             try
@@ -438,7 +548,11 @@ namespace NetCore.Core.Caching.Impl
 
             return default;
         }
-
+        /// <summary>
+        /// EnQueue
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="item"></param>
         public void EnQueue(string key, string item)
         {
             try
@@ -454,7 +568,12 @@ namespace NetCore.Core.Caching.Impl
                 _logger.LogError(ex, ex.Message);
             }
         }
-
+        /// <summary>
+        /// EnQueueAsync
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public async Task EnQueueAsync(string key, string item)
         {
             try
@@ -472,7 +591,11 @@ namespace NetCore.Core.Caching.Impl
                 _logger.LogError(ex, ex.Message);
             }
         }
-
+        /// <summary>
+        /// SearchKeys
+        /// </summary>
+        /// <param name="patern"></param>
+        /// <returns></returns>
         public List<string> SearchKeys(string patern)
         {
             List<string> lstRet = new List<string>();
@@ -493,7 +616,11 @@ namespace NetCore.Core.Caching.Impl
             }
             return lstRet;
         }
-
+        /// <summary>
+        ///DeleteKeys
+        /// </summary>
+        /// <param name="patern"></param>
+        /// <returns></returns>
         public bool DeleteKeys(string patern)
         {
             bool frag = false;

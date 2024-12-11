@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NetCore.Core.Utils;
+﻿using NetCore.Core.Utils;
 
 namespace NetCore.Core.Caching.Common
 {
@@ -12,6 +11,12 @@ namespace NetCore.Core.Caching.Common
             public object Input { get; set; }
             public bool IsSerialize { get; set; }
         }
+        /// <summary>
+        /// GenCacheKey
+        /// </summary>
+        /// <param name="cacheName"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static string GenCacheKey(string cacheName, params object[] args)
         {
             string cacheKey = $"{_prefixKey}{separator}{cacheName}";
@@ -24,14 +29,23 @@ namespace NetCore.Core.Caching.Common
 
             return cacheKey;
         }
-
+        /// <summary>
+        /// Aggregate
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         private static string Aggregate(string current, object param)
         {
             var paramSerialize = NewtonJson.Serialize(param);
             current = current + separator + EncodeObject(paramSerialize);
             return current;
         }
-
+        /// <summary>
+        /// EncodeObject
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private static string EncodeObject(object obj)
         {
             if (obj == null) return string.Empty;

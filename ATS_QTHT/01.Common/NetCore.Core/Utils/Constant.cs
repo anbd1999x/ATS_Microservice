@@ -78,6 +78,8 @@ namespace NetCore.Core.Utils
             public const string MSSQL = "MSSQL";
             public const string POSTGRESQL = "PostgreSQL";
             public const string ORACLE = "Oracle";
+            public const string MYSQL = "MySql";
+            public const string SQLITE = "Sqlite";
         }
         public class BackupFolder
         {

@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace NetCore.Core.Core
 {
     public class DictionaryStringObjectJsonConverter : JsonConverter<Dictionary<string, object>>
     {
+        /// <summary>
+        /// Read
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        /// <exception cref="System.Text.Json.JsonException"></exception>
+        /// <exception cref="JsonException"></exception>
         public override Dictionary<string, object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -41,12 +48,23 @@ namespace NetCore.Core.Core
 
             return dictionary;
         }
-
+        /// <summary>
+        /// Write
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="options"></param>
         public override void Write(Utf8JsonWriter writer, Dictionary<string, object> value, JsonSerializerOptions options)
         {
             JsonSerializer.Serialize(writer, value, options);
         }
-
+        /// <summary>
+        /// ExtractValue
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        /// <exception cref="JsonException"></exception>
         private object ExtractValue(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
             switch (reader.TokenType)

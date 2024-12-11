@@ -1,17 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace NetCore.Models
 {
-    ///<Summary>
-    /// MinIODTO
-    ///</Summary>
-
-
     public class Connect
     {
         public string Host { get; set; }

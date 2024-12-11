@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace NetCore.Models
+﻿namespace NetCore.Models
 {
     public class Action1 : MasterCommonModel
     {
