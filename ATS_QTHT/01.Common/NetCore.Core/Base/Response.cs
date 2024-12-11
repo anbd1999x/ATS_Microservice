@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NetCore.Core.Utils;
+using System;
 
 namespace SV.QTHT.Core
 {
@@ -62,45 +63,15 @@ namespace SV.QTHT.Core
             Message = message;
         }
     }
-    /// <summary>
-    ///     Đối tượng mã trả về
-    /// </summary>
-    public enum Code
+    public class FilterBase
     {
-        Success = 200,
-        Created = 201,
-        BadRequest = 400,
-        Unauthorized = 401,
-        Forbidden = 403,
-        NotFound = 404,
-        MethodNotAllowed = 405,
-        Conflict = 409,
-        ServerError = 500,
-        Timeout = 200002,
-        SuccessRequest = 200001,
-        ApplicationRequire = 400001,
-        ApplicationNotExited = 400002,
-        OrganizationRequire = 400003,
-        OrganizationNotExited = 400004,
-        RequestIdRequire = 400007,
-        DeviceIdRequire = 400009,
-        IPAddressRequire = 400010,
-        DeviceNameRequire = 400011,
-        
-    }
-    /// <summary>
-    ///  Đối tượng status trả về
-    /// </summary>
-    public enum StatusCode
-    {
-        Success = 200,
-        Created = 201,
-        BadRequest = 400,
-        Unauthorized = 401,
-        Forbidden = 403,
-        NotFound = 404,
-        MethodNotAllowed = 405,
-        Conflict = 409,
-        ServerError = 500,
+        public int? PageSize { get; set; }
+        public int? PageNumber { get; set; }
+        public bool? Status { get; set; }
+        public string PropertyName { get; set; } = "date_created";
+        //asc - desc
+        public string Ascending { get; set; } = "desc";
+        public string TextSearch { get; set; }
+
     }
 }

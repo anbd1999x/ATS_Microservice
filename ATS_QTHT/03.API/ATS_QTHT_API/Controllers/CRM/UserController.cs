@@ -1,4 +1,4 @@
-﻿using ATS_QTHT_Service.CRM.Logic;
+﻿using ATS_QTHT_API.HttpServices.CRM;
 using Microsoft.AspNetCore.Mvc;
 using NetCore.Models;
 using SV.QTHT.Core;
@@ -11,9 +11,9 @@ namespace ATS_QTHT_Service.CRM.Controllers
     [Description("Nhóm chức năng xử lý User")]
     public class UserController : Controller
     {
-        private readonly IDbUserHandler _dbUSerHandler;
+        private readonly IDbUserCRMHttpService _dbUSerHandler;
 
-        public UserController(IDbUserHandler dbUSerHandler)
+        public UserController(IDbUserCRMHttpService dbUSerHandler)
         {
             _dbUSerHandler = dbUSerHandler;
         }

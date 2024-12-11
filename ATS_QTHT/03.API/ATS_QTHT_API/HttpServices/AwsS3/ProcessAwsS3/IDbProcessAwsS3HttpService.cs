@@ -6,7 +6,7 @@ using SV.QTHT.Core;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
+namespace ATS_QTHT_API.HttpServices.AwsS3.ProcessAwsS3
 {
     /// <summary>
     /// IDbProcessAwsS3Handler

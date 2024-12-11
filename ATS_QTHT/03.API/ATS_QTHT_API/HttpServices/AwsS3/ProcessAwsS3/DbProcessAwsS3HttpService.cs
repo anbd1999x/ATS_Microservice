@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
+namespace ATS_QTHT_API.HttpServices.AwsS3.ProcessAwsS3
 {
     ///<Summary>
     ///</Summary>

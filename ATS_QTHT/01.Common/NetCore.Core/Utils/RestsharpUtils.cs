@@ -8,6 +8,15 @@ namespace NetCore.Core.Utils
 {
     public static class RestsharpUtils
     {
+        /// <summary>
+        /// PostAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="header"></param>
+        /// <param name="body"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public async static Task<T> PostAsync<T>(string url, List<KeyValuePair<string, string>> header = null, object body = default, List<KeyValuePair<string, string>> param = null)
         {
 
@@ -47,7 +56,15 @@ namespace NetCore.Core.Utils
             else
                 return default;
         }
-
+        /// <summary>
+        /// Post
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="header"></param>
+        /// <param name="body"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public static T Post<T>(string url, List<KeyValuePair<string, string>> header = null, object body = default, List<KeyValuePair<string, string>> param = null)
         {
             // Cấu hình RestClient
@@ -85,7 +102,14 @@ namespace NetCore.Core.Utils
             else
                 return default;
         }
-
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="header"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public static T Get<T>(string url, List<KeyValuePair<string, string>> header = null, List<KeyValuePair<string, string>> param = null)
         {
 
@@ -123,7 +147,14 @@ namespace NetCore.Core.Utils
             else
                 return default;
         }
-
+        /// <summary>
+        /// GetAsync
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="header"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public async static Task<T> GetAsync<T>(string url, List<KeyValuePair<string, string>> header = null, List<KeyValuePair<string, string>> param = null)
         {
             // Cấu hình RestClient

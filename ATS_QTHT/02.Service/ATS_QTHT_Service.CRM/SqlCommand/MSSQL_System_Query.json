@@ -1,0 +1,5 @@
+{
+  "Users": {
+    "GetAll": "select * from [User]"
+  }
+}

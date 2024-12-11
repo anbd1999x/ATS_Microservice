@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using SV.QTHT.Core;
 using NetCore.Core.Utils;
 using NetCore.Models;
-using ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3;
 using NetCore.Core.Caching.Interface;
 using System.ComponentModel;
+using ATS_QTHT_API.HttpServices.AwsS3.ProcessAwsS3;
 
-namespace ATS_QTHT_API.Controllers
+namespace ATS_QTHT_API.Controllers.AwsS3
 {
     /// <summary>
     /// <ControllerDes>Quản lý AwsS3</ControllerDes>
@@ -53,7 +53,7 @@ namespace ATS_QTHT_API.Controllers
 
                 throw;
             }
-          
+
 
         }
         /// <summary>
@@ -66,7 +66,7 @@ namespace ATS_QTHT_API.Controllers
         public async Task<Response<bool>> CreateBucketAsync(MakeBucketASW3 param)
         {
             return await _dbProcessAwsS3Handler.CreateBucketAsync(param);
-            
+
         }
 
         /// <summary>

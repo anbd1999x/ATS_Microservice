@@ -9,6 +9,10 @@
       {
         "Path": "03.API\\ATS_QTHT_API\\ATS_QTHT_API.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "02.Service\\ATS_QTHT_Service.CRM\\ATS_QTHT_Service.CRM.csproj",
+        "Action": "Start"
       }
     ]
   }

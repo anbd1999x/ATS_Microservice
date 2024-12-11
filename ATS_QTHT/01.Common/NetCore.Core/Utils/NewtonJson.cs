@@ -18,12 +18,23 @@ namespace NetCore.Core.Utils
             };
             MicrosoftDateFormatSettings = settings;
         }
-
+        /// <summary>
+        /// Deserialize
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonString"></param>
+        /// <returns></returns>
         public static T Deserialize<T>(string jsonString)
         {
             return JsonConvert.DeserializeObject<T>(jsonString, MicrosoftDateFormatSettings);
         }
-
+        /// <summary>
+        /// Deserialize
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonString"></param>
+        /// <param name="dateTimeFormat"></param>
+        /// <returns></returns>
         public static T Deserialize<T>(string jsonString, string dateTimeFormat)
         {
             var converters = new JsonConverter[1];
@@ -34,17 +45,31 @@ namespace NetCore.Core.Utils
             converters[0] = converter;
             return JsonConvert.DeserializeObject<T>(jsonString, converters);
         }
-
+        /// <summary>
+        /// DeserializeObject
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static object DeserializeObject(string jsonString, Type type)
         {
             return JsonConvert.DeserializeObject(jsonString, type);
         }
-
+        /// <summary>
+        /// Serialize
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
         public static string Serialize(object @object)
         {
             return JsonConvert.SerializeObject(@object, MicrosoftDateFormatSettings);
         }
-
+        /// <summary>
+        /// Serialize
+        /// </summary>
+        /// <param name="object"></param>
+        /// <param name="dateTimeFormat"></param>
+        /// <returns></returns>
         public static string Serialize(object @object, string dateTimeFormat)
         {
 

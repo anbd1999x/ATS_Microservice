@@ -11,7 +11,7 @@ namespace NetCore.DataProcess.Ioc
         /// RegisterDapperServiceComponents
         /// </summary>
         /// <param name="services"></param>
-        public static void RegisterDapperServiceComponents(this IServiceCollection services)
+        public static IServiceCollection RegisterDapperServiceComponents(this IServiceCollection services)
         {
             #region Config database
             var databaseType = AppSettings.Instance.GetEnviromentVariable("ConnectionString:DbType");
@@ -26,6 +26,8 @@ namespace NetCore.DataProcess.Ioc
             services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
             services.AddScoped<IDapperUnitOfWork, DapperUnitOfWork>();
             services.AddScoped<ITransactionDapperUnitOfWork, TransactionDapperUnitOfWork>();
+
+            return services;
             #endregion Config database
 
         }
