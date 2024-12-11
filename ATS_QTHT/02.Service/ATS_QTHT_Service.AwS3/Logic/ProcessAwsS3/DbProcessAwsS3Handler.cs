@@ -1,16 +1,9 @@
-﻿
-using Amazon.S3;
+﻿using Amazon.S3;
 using Amazon.S3.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using NetCore.Core.Utils;
 using NetCore.Models;
+using Serilog;
 using SV.QTHT.Core;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
 {
@@ -23,11 +16,12 @@ namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
         private readonly string _accessKeyAWSS3 = AppSettings.Instance.GetEnviromentVariable("AWSS3:accessKey");
         private readonly string _secretKeyAWSS3 = AppSettings.Instance.GetEnviromentVariable("AWSS3:secretKey");
         private readonly string _bucketAWSS3 = AppSettings.Instance.GetEnviromentVariable("AWSS3:bucket");
-
         private AmazonS3Client _s3Client { get; set; }
 
-        ///<Summary>
-        ///</Summary>
+        /// <summary>
+        /// DbProcessAwsS3Handler
+        /// </summary>
+        /// <param name="logger"></param>
         public DbProcessAwsS3Handler(ILogger<DbProcessAwsS3Handler> logger)
         {
             _logger = logger;
@@ -106,6 +100,8 @@ namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
             }
             catch (Exception ex)
             {
+                Log.Error(ex,"log 1 aThis is an informational message.");
+
                 _logger.LogError(ex, ex.Message);
                 return new Response<bool>(Constant.ErrorCode.FAIL_CODE, ex.Message, false);
             }
@@ -383,7 +379,7 @@ namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
         /// <summary>
         /// Tải xuống tệp có URL thời gian 
         /// </summary>
-        public Response<string> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
+        public async Task<Response<string>> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
         {
             try
             {
@@ -401,8 +397,7 @@ namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
                     Expires = DateTime.Now.AddSeconds(param.Expiration),
                 };
                 String url = _s3Client.GetPreSignedURL(request);
-
-                return new Response<string>(Constant.ErrorCode.SUCCESS_CODE, Constant.ErrorCode.SUCCESS_MESS, url);
+                return new  Response<string>(Constant.ErrorCode.SUCCESS_CODE, Constant.ErrorCode.SUCCESS_MESS, url);
             }
             catch (Exception ex)
             {

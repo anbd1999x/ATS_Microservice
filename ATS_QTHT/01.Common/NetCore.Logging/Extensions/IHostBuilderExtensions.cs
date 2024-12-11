@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using NLog.Web;
+using Serilog;
 
 namespace NetCore.Logging.Extensions
 {

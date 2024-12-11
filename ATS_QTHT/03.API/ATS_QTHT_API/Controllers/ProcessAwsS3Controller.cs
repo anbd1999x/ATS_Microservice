@@ -1,14 +1,10 @@
 ﻿using Amazon.S3.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SV.QTHT.Core;
 using NetCore.Core.Utils;
 using NetCore.Models;
 using ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using NetCore.Core.Caching.Interface;
-using static NetCore.Core.Utils.Constant.SqlDapper.Query.System;
 using System.ComponentModel;
 
 namespace ATS_QTHT_API.Controllers
@@ -19,7 +15,7 @@ namespace ATS_QTHT_API.Controllers
     /// </summary>
     [Route("[controller]/[action]")]
     [ApiController]
-    [Description("Nhóm chức năng xử lý tài liệu trên AWS3")]
+    [Description("Nhóm chức năng xử lý file trên AWS3")]
 
     public class ProcessAwsS3Controller : ControllerBase
     {
@@ -44,10 +40,20 @@ namespace ATS_QTHT_API.Controllers
         [HttpPost]
         public async Task<Response<bool>> CheckConnection(ConnectASW3 param)
         {
-             var res = await _cached.GetAsync<ConnectASW3>("ATS");
-            await _cached.AddAsync("ATS", param, 10);
-            var res2 = await _cached.GetAsync<ConnectASW3>("ATS");
-            return await _dbProcessAwsS3Handler.CheckConnection(param);
+
+            try
+            {
+                var res = await _cached.GetAsync<ConnectASW3>("ATS");
+                await _cached.AddAsync("ATS", param, 10);
+                var res2 = await _cached.GetAsync<ConnectASW3>("ATS");
+                return await _dbProcessAwsS3Handler.CheckConnection(param);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+          
 
         }
         /// <summary>
@@ -147,16 +153,16 @@ namespace ATS_QTHT_API.Controllers
             return await _dbProcessAwsS3Handler.DeleteFileAsync(param);
         }
 
-        ///// <summary>
-        ///// tính theo giây, nếu trong thời gian link không được sử dụng thì sẽ bị vô hiệu hóa
-        ///// </summary>
-        ///// <param name="param"></param>
-        ///// <action>DOWNLOAD</action>
-        //[HttpPost]
-        //public Response<string> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
-        //{
-        //    return _dbProcessAwsS3Handler.DownloadFileWithTimeURL(param);
-        //}
+        /// <summary>
+        /// tính theo giây, nếu trong thời gian link không được sử dụng thì sẽ bị vô hiệu hóa
+        /// </summary>
+        /// <param name="param"></param>
+        /// <action>DOWNLOAD</action>
+        [HttpPost]
+        public async Task<Response<string>> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
+        {
+            return await _dbProcessAwsS3Handler.DownloadFileWithTimeURL(param);
+        }
 
         /// <summary>
         /// Check Bucket Exits
@@ -179,7 +185,6 @@ namespace ATS_QTHT_API.Controllers
         {
             return await _dbProcessAwsS3Handler.CheckFileExists(param);
         }
-
 
         /// <summary>
         /// Check Bucket Exist File

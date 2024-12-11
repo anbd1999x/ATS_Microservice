@@ -1,12 +1,10 @@
 ﻿using Amazon.S3.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SV.QTHT.Core;
 using NetCore.Core.Utils;
 using NetCore.Models;
 using ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace ATS_QTHT_Service.AwsS3.Controllers
 {
@@ -16,17 +14,16 @@ namespace ATS_QTHT_Service.AwsS3.Controllers
     /// </summary>
     [Route("[controller]/[action]")]
     [ApiController]
+    [Description("Nhóm chức năng xử lý file trên AWS3")]
     public class ProcessAwsS3Controller : ControllerBase
     {
 
-        private readonly ILogger<ProcessAwsS3Controller> _logger;
         private readonly IDbProcessAwsS3Handler _dbProcessAwsS3Handler;
 
         /// <summary>
         /// </summary>
-        public ProcessAwsS3Controller(ILogger<ProcessAwsS3Controller> logger, IDbProcessAwsS3Handler dbProcessAwsS3Handler)
+        public ProcessAwsS3Controller(IDbProcessAwsS3Handler dbProcessAwsS3Handler)
         {
-            _logger = logger;
             _dbProcessAwsS3Handler = dbProcessAwsS3Handler;
         }
         /// <summary>
@@ -38,7 +35,6 @@ namespace ATS_QTHT_Service.AwsS3.Controllers
         public async Task<Response<bool>> CheckConnection(ConnectASW3 param)
         {
             return await _dbProcessAwsS3Handler.CheckConnection(param);
-
         }
         /// <summary>
         /// Tạo bucket(Folder)
@@ -50,7 +46,6 @@ namespace ATS_QTHT_Service.AwsS3.Controllers
         public async Task<Response<bool>> CreateBucketAsync(MakeBucketASW3 param)
         {
             return await _dbProcessAwsS3Handler.CreateBucketAsync(param);
-            
         }
 
         /// <summary>
@@ -143,9 +138,9 @@ namespace ATS_QTHT_Service.AwsS3.Controllers
         /// <param name="param"></param>
         /// <action>DOWNLOAD</action>
         [HttpPost]
-        public Response<string> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
+        public async Task<Response<string>> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
         {
-            return _dbProcessAwsS3Handler.DownloadFileWithTimeURL(param);
+            return await _dbProcessAwsS3Handler.DownloadFileWithTimeURL(param);
         }
 
         /// <summary>

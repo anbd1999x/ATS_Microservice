@@ -20,7 +20,7 @@ namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
         Task<Response<bool>> UploadFileAsync(UploadDataMinIOByIfromFile param);
         Task<Response<List<AwsS3DTO>>> GetAllFilesAsync(DonwloadObjectASW3 param);
         Task<Response<bool>> DeleteFileAsync(DonwloadObjectASW3 param);
-        //Response<string> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param);
+        Task<Response<string>> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param);
         Task<Response<bool>> UpLoadFileByStreamAWS3(UploadDataAWS3ByIStream data);
         Task<Response<bool>> UpLoadFileByPathAWS3(UploadDataAWS3ByPath data);
         Task<Response<bool>> CheckBucketExits(MakeBucketASW3 param);

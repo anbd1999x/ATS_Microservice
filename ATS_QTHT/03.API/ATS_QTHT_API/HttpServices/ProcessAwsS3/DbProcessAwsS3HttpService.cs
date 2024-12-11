@@ -113,14 +113,14 @@ namespace ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3
             return await _httpHelper.GetAsync<Response<bool>>($"ProcessAwsS3/DeleteFileAsync");
         }
 
-        ///// <summary>
-        ///// Tải xuống tệp có URL thời gian 
-        ///// </summary>
-        //public async Response<string> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
-        //{
-        //    return  await _httpHelper.GetAsync<Response<string>>($"ProcessAwsS3/DownloadFileWithTimeURL");
+        /// <summary>
+        /// Tải xuống tệp có URL thời gian 
+        /// </summary>
+        public async Task<Response<string>> DownloadFileWithTimeURL(DonwloadObjecASW3tURL param)
+        {
+            return await _httpHelper.GetAsync<Response<string>>($"ProcessAwsS3/DownloadFileWithTimeURL");
 
-        //}
+        }
 
         /// <summary>
         /// kiểm tra bucket(Folder) đã tồn tại chưa

@@ -4,31 +4,33 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 using System.Collections.Generic;
+using Serilog;
+using Microsoft.Extensions.Hosting;
+using Serilog.Filters;
+using Serilog.Formatting.Compact;
+using Microsoft.AspNetCore.Builder;
+using NetCore.Core.Utils;
 
 namespace NetCore.Logging.Extensions
 {
     public static class LoggingBuilderExten
     {
-        public static void UseSerilog(this ILoggingBuilder builder, IConfiguration configuration)
+        /// <summary>
+        /// UseSerilog
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static void UseSerilog(WebApplicationBuilder builder, IConfiguration configuration)
         {
-            //builder.AddSerilog();
-
-            //Log.Logger = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(configuration, "Logging:Providers:Serilog")
-            //    .CreateLogger();
-
-            //Log.Logger = new LoggerConfiguration()
-            //    .WriteTo.Console()
-            //    .WriteTo.Logger(configuration =>
-            //    {
-            //        configuration.WriteTo.File("Logs/error.log");
-            //        configuration.Filter.ByIncludingOnly(ev => ev.)
-            //    })
-            //    .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                   .ReadFrom.Configuration(builder.Configuration) // Đọc từ cấu hình appsettings.json
+                   .CreateLogger();
+            builder.Logging.ClearProviders(); 
+            builder.Logging.AddSerilog(Log.Logger);
         }
 
         /// <summary>
-        ///
+        ///UseNLog
         /// </summary>
         /// <param name="builder">Using ILogging builder</param>
         /// <param name="configFile">nlog.config file</param>

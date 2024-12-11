@@ -1,11 +1,9 @@
-﻿
-using NetCore.Core.Utils;
-using ATS_QTHT_Service.AwsS3.Logic.ProcessAwsS3;
+﻿using NetCore.Core.Utils;
 using NetCore.DataProcess.EntitiFramework;
 using MediatR;
 using NetCore.Core.Caching.Ioc;
 
-namespace ATS_QTHT_Service.AwsS3.Ioc
+namespace ATS_QTHT_Service.CRM.Ioc
 {
     ///<Summary>
     /// RegisterIoCs
@@ -22,9 +20,7 @@ namespace ATS_QTHT_Service.AwsS3.Ioc
             services.RegisterDataContextServiceComponents(configuration);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IDbProcessAwsS3Handler, DbProcessAwsS3Handler>();
             services.AddHttpContextAccessor();
-
 
         }
     }
